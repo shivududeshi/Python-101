@@ -28,3 +28,4 @@ def union(file_1,file_2,file_3):
     print(f'L1.txt: {count_list[0]} emails, L2.txt: {count_list[1]} emails, R.txt: {count_final[-1]} emails; Time taken: {time_taken} seconds' )
 
 union(file_1,file_2,file_3)
+# union('t1.txt','t2.txt','t3.txt')
