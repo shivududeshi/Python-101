@@ -1,5 +1,5 @@
 
-def email_check(file_name):
+def read_file(file_name):
     """
         Check for valid mails in given file
 
@@ -45,3 +45,9 @@ def validate_args(argv):
         print('Mentioned error occurred.Solve error and rerun programme. the error is: ',e)
     else:
         return output
+def write_file(file_3)
+    with open(file_3,'w') as f3:
+        f3.write('\n'.join())
+
+    time_taken=time_end-time_start
+    print(f'{file_1}: {f1_count} emails, {file_2}: {f2_count} emails, {file_3}: {len(result)} emails; Time taken: {time_taken} seconds' )

@@ -1,8 +1,7 @@
 
 import time
-time_start = time.time()
 import sys
-from project_3 import email_check,validate_args
+from project_3 import read_file,validate_args,write_file
 args = sys.argv
 
 def union(file_1,file_2):
@@ -22,12 +21,12 @@ def union(file_1,file_2):
     return file_2
 
 if __name__=='__main__':
+    time_start = time.time()
     file_1,file_2,file_3=validate_args(args)
-    f1_mails,f1_count=email_check(file_1)
-    f2_mails,f2_count=email_check(file_2)
+    f1_mails=read_file(file_1)
+    f2_mails=read_file(file_2)
     result=union(f1_mails,f2_mails)
-    with open(file_3,'w') as f3:
-        f3.write('\n'.join(result))
+    write_file(result)
     time_end = time.time()
     time_taken=time_end-time_start
-    print(f'{file_1}: {f1_count} emails, {file_2}: {f2_count} emails, {file_3}: {len(result)} emails; Time taken: {time_taken} seconds' )
+    print(f'{file_1}: {len(f1_mails)} emails, {file_2}: {f2_mails} emails, {file_3}: {len(result)} emails; Time taken: {time_taken} seconds' )
