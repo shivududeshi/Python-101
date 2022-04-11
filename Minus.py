@@ -2,25 +2,31 @@
 import time
 time_start = time.time()
 import sys
-from project_3 import email_check
+from project_3 import email_check,validate_args
+args = sys.argv
 
-file_1=sys.argv[1]
-file_2=sys.argv[2]
-file_3=sys.argv[3]
+def minus(file_1,file_2):
+    """
+        finding minus of given two dictionaries
 
-def minus(file_1,file_2,file_3):
-
-    f1_valid_mails,f1_count=email_check(file_1)
-    f2_valid_mails,f2_count=email_check(file_2)
+        Args
+            file_1,file_2 (dict): dictionaries to find minus
+        return
+            dict: dictionary of minus of given dictionaries.
+    """
     duplicate_dict={}
-    for x in f1_valid_mails:
-        if x not in f2_valid_mails:
+    for x in file_1:
+        if x not in file_2:
             duplicate_dict[x]=1
+    return duplicate_dict
+
+if __name__=='__main__':
+    file_1,file_2,file_3=validate_args(args)
+    f1_mails,f1_count=email_check(file_1)
+    f2_mails,f2_count=email_check(file_2)
+    result=minus(f1_mails,f2_mails)
     with open(file_3,'w') as f3:
-        f3.write('\n'.join(duplicate_dict))
+        f3.write('\n'.join(result))
     time_end = time.time()
     time_taken=time_end-time_start
-    print(f'L1.txt: {f1_count} emails, L2.txt: {f2_count} emails, R.txt: {len(duplicate_dict)} emails; Time taken: {time_taken} seconds' )
-
-minus(file_1,file_2,file_3)
-# minus('L1.txt','L2.txt','R.txt')
+    print(f'L1.txt: {f1_count} emails, L2.txt: {f2_count} emails, R.txt: {len(result)} emails; Time taken: {time_taken} seconds' )
