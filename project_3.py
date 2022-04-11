@@ -1,4 +1,5 @@
-
+from os import path
+import re
 def read_file(file_name):
     """
         Check for valid mails in given file
@@ -8,23 +9,16 @@ def read_file(file_name):
         return
             dict: dictionary of valid mails as keys.
     """
-    import re
-    count=0
     # regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+')
     regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@([A-Za-z0-9]+[-])*[A-Za-z0-9]+\.([A-Za-z]{2,})+')
-
     with open(file_name, 'r') as f:
         valid_mail={}
         for x in f.readlines():
             email = x.rstrip('\n')
             if re.fullmatch(regex, email):
-                count += 1
                 if email not in valid_mail:
                     valid_mail[email]=1
-                else:
-                    valid_mail[email] += 1
-    return valid_mail,count
-
+    return valid_mail
 
 def validate_args(argv):
     """
@@ -35,19 +29,15 @@ def validate_args(argv):
         return
             list: list of valid arguments .
     """
-    try:
-        output=[]
-        for i in range(1,len(argv)):
-            with open(argv[i],'r') as f1:
-                if type(f1.readline())==str:
-                    output.append(argv[i])
-    except Exception as e:
-        print('Mentioned error occurred.Solve error and rerun programme. the error is: ',e)
+    if len(argv)!=4:
+        raise Exception('Need to pass 4 arguments')
     else:
-        return output
-def write_file(file_3)
-    with open(file_3,'w') as f3:
-        f3.write('\n'.join())
+        for i in range(1,4):
+            if not path.isfile(argv[i]):
+                raise Exception(argv[i]+' file not found')
+            if path.getsize(argv[i])==0 and i!=3:
+                raise Exception(argv[i]+' Input file is empty')
+            if path.getsize(argv[i])>0 and i==3:
+                raise Exception(argv[3]+' Output file is not empty')
 
-    time_taken=time_end-time_start
-    print(f'{file_1}: {f1_count} emails, {file_2}: {f2_count} emails, {file_3}: {len(result)} emails; Time taken: {time_taken} seconds' )
+        return argv[1:]
