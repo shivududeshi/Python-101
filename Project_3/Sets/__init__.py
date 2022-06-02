@@ -1,3 +1,3 @@
 
-from .Myset import union, intersection, minus
-from .Utils import read_file, write_file, validate_args
+from .Myset import Myset
+from .Utils import validate_args

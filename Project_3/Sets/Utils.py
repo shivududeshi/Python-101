@@ -2,43 +2,42 @@ from os import path
 import re
 
 
-def read_file(file_name):
-    """
-    Check for valid mails in given file
-
-    Args:
-        file_name (str): collection of strings
-
-    Returns
-        dict: return dictionary of valid mails as keys.
-    """
-    # regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@([A-Za-z0-9]+[-])*[A-Za-z0-9]+\.([A-Za-z]{2,})+')
-    regex = re.compile(r'[A-Za-z]([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z]([A-Za-z0-9]+[-])*[A-Za-z0-9]+\.([A-Za-z]{2,})+')
-    with open(file_name, 'r') as f:
-        valid_mails = {}
-        count = 0
-        for x in f.readlines():
-            email = x.rstrip('\n')
-            if re.fullmatch(regex, email):
-                count += 1
-                print(email)
-                if email.lower() not in valid_mails:
-                    valid_mails[email.lower()] = 1
-    return valid_mails, count
-
-
-def write_file(result, out_file):
-    """
-    Write input to file
-    py:function::
-
-    Args:
-        result(dict), out_file(text file): dictionary to write into file
-    Returns:
-        None
-    """
-    with open(out_file, 'w') as f3:
-        f3.write('\n'.join(result))
+# def read_file(file_name):
+#     """
+#     Check for valid mails in given file
+#
+#     Args:
+#         file_name (str): file containing strings
+#
+#     Returns
+#         dict: return dictionary of valid mails as keys.
+#     """
+#     # regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+')
+#     regex = re.compile(r'([A-Za-z][A-Za-z0-9]+[.-_])*[A-Za-z][A-Za-z0-9]*@([A-Za-z][A-Za-z0-9]+[-])*[A-Za-z][A-Za-z0-9]*\.([A-Za-z]{2,})+')
+#     with open(file_name, 'r') as f:
+#         valid_mails = {}
+#         count = 0
+#         for x in f.readlines():
+#             email = x.rstrip('\n').lower()
+#             if re.fullmatch(regex, email):
+#                 count += 1
+#                 if email not in valid_mails:
+#                     valid_mails[email] = 1
+#     return valid_mails, count
+#
+#
+# def write_file(result, out_file):
+#     """
+#     Write input to file
+#     py:function::
+#
+#     Args:
+#         result(dict), out_file(text file): dictionary to write into file
+#     Returns:
+#         None
+#     """
+#     with open(out_file, 'w') as f3:
+#         f3.write('\n'.join(result))
 
 
 def validate_args(argv):
@@ -50,10 +49,10 @@ def validate_args(argv):
         argv(list): takes arguments from command line
 
     Returns:
-        list: return list of valid arguments.
+        list: return list, if arguments are valid.
     """
     if len(argv) != 4:
-        raise Exception('Usage: python Union.py <in_file1> <out_file2> <result_file>')
+        raise Exception('Usage: python Union.py <in_file1> <in_file2> <result_file>')
     else:
         for i in range(1, 3):
             if not path.isfile(argv[i]):
